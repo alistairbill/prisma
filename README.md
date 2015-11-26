@@ -17,18 +17,17 @@ Main features:
 - Scramble queue manipulation
 - Session summary
 - Color scheme editor
-- Export to CSV
 
 
 ![Timer Window](https://raw.githubusercontent.com/spectre013/prisma/master/imgs/timer.png)
 
-![History Window](https://raw.githubusercontent.com/spectre013/prisma/master/imgs/history.png)
+![History Window](https://raw.githubusercontent.com/spectre013/prisma/master/imgs/hisotry.png)
 
 ![Colors Window](https://raw.githubusercontent.com/spectre013/prisma/master/imgs/colors.png)
 
 
 ##Contributors
-Moony22
+[Moony22](https://github.com/Moony22) (Current Maintainer)
 
 Methuselah96
 
