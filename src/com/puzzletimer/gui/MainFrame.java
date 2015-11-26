@@ -16,7 +16,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -66,6 +65,7 @@ import com.puzzletimer.timer.ManualInputTimer;
 import com.puzzletimer.timer.SpaceKeyTimer;
 import com.puzzletimer.timer.StackmatTimer;
 import com.puzzletimer.tips.TipProvider;
+import com.puzzletimer.util.ExportUtils;
 import com.puzzletimer.util.SolutionUtils;
 import org.h2.command.dml.Update;
 import org.json.JSONObject;
@@ -820,6 +820,9 @@ public class MainFrame extends JFrame {
     private AudioFormat audioFormat;
     private Mixer.Info mixerInfo;
 
+    private JMenu toolsMenu;
+    private JMenuItem exportSolutionsToCSV;
+
     boolean update = false;
 
     public boolean hasUpdate() {
@@ -837,7 +840,7 @@ public class MainFrame extends JFrame {
             TipProvider tipProvider,
             CategoryManager categoryManager,
             ScrambleManager scrambleManager,
-            SolutionManager solutionManager,
+            final SolutionManager solutionManager,
             SessionManager sessionManager) {
         this.messageManager = messageManager;
         this.puzzleProvider = puzzleProvider;
@@ -1346,6 +1349,14 @@ public class MainFrame extends JFrame {
             }
         });
 
+        // menuItemExport
+        this.exportSolutionsToCSV.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ExportUtils.ExportToFile(solutionManager);
+            }
+        });
+
         // labelMessage
         this.messageManager.addListener(new MessageManager.Listener() {
             @Override
@@ -1622,6 +1633,12 @@ public class MainFrame extends JFrame {
         this.menuItemMilliseconds.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, menuShortcutKey));
         menuTimerPrecision.add(this.menuItemMilliseconds);
         timerPrecisionGroup.add(this.menuItemMilliseconds);
+
+        //menuTools
+        this.toolsMenu = new JMenu(_("main.tools"));
+        this.exportSolutionsToCSV = new JMenuItem(_("main.export_csv"));
+        toolsMenu.add(this.exportSolutionsToCSV);
+        menuBar.add(this.toolsMenu);
 
         //menuHelp
         JMenu menuHelp = new JMenu(_("main.help"));
